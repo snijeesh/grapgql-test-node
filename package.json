@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.9.4",
+    "apollo-datasource": "^0.7.0",
+    "lodash": "4.17",
     "nodemon": "2.0"
   },
   "type": "module"

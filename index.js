@@ -1,21 +1,24 @@
 import { ApolloServer } from "@apollo/server"
 import { startStandaloneServer } from "@apollo/server/standalone"
+import { SessionAPI } from './datasources/sessions.js'
 
-const typeDefs = `
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!'
-  },
-};
+import typeDefs from "./schema.js";
+import resolvers from "./resolvers.js"; 
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  //dataSources not working right now.
+  dataSources: () => ({
+            sessionApi: new SessionAPI()
+        }),
+        context: () => {
+            return {
+                dataSources: {
+                    sessionApi: new SessionAPI()
+               }
+            }
+          }
 })
 
 const { url } = await startStandaloneServer(server)
